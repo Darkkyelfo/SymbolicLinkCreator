@@ -6,9 +6,11 @@ computerName = socket.gethostname()
 pathRemoteServer = r"\\192.168.56.123\html"
 localCreateLink = r"C:\Users\raul1\projetosPHP"
 localName = sys.argv[1]
-#Caso só receba um argumento esse argumento deve ser de mesmo nome do arquivo remoto
+fullLocalPath = localCreateLink + "\\" + localName + "_local"
+# Caso só receba um argumento esse argumento deve ser de mesmo nome do arquivo remoto
 try:
     remoteName = sys.argv[2]
 except IndexError:
     remoteName = localName
-os.system(r'''mklink /d "%s\%s" "%s\%s"''' % (localCreateLink, localName, pathRemoteServer, remoteName))
+os.system(r'''mkdir %s''' % fullLocalPath)
+os.system(r'''mklink /d "%s\%s" "%s\%s"''' % (fullLocalPath, localName, pathRemoteServer, remoteName))
